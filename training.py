@@ -106,12 +106,12 @@ input_size = len(X_train[0])
 hidden_size = 8
 output_size = len(tags)
 
-model = NeuralNetwork(input_size, hidden_size, output_size).to(device)
+chat_bot_model = NeuralNetwork(input_size, hidden_size, output_size).to(device)
 
 # Loss and optimizer
 learning_rate = 0.001
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.Adam(chat_bot_model.parameters(), lr=learning_rate)
 
 # Train the model
 num_of_epochs = 1000
@@ -121,7 +121,7 @@ for epoch in range(num_of_epochs):
         labels = labels.to(device=device, dtype=torch.int64)
 
         # Forward pass
-        outputs = model(words)
+        outputs = chat_bot_model(words)
         loss = criterion(outputs, labels)
 
         # Backward and optimize
@@ -133,7 +133,7 @@ for epoch in range(num_of_epochs):
         print(f'Epoch [{epoch + 1}/{num_of_epochs}], Loss: {loss.item():.4f}')
 
 chat_data = {
-"model_state": model.state_dict(),
+"model_state": chat_bot_model.state_dict(),
 "input_size": input_size,
 "hidden_size": hidden_size,
 "output_size": output_size,

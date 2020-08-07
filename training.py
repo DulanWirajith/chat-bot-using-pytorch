@@ -10,6 +10,8 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
+from chat_bot_model import NeuralNetwork
+
 stemmer = PorterStemmer()
 
 with open('dataset.json', 'r') as f:
@@ -99,3 +101,9 @@ train_loader = DataLoader(dataset=dataset,
 #  you can change num_workers=0 to 2 , if you have pytorch gpu(cuda)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+input_size = len(X_train[0])
+hidden_size = 8
+output_size = len(tags)
+
+model = NeuralNetwork(input_size, hidden_size, output_size).to(device)

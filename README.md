@@ -1,7 +1,7 @@
 # chat-bot-using-pytorch
 
-This is a chatbot can use for Online Ecommerce Platform
-Firstly you have to give datasets about the ecommerce site. then chatbot will work finely..
+This is a chatbot can use for Online Ecommerce Platform.
+Firstly you have to give datasets about the ecommerce site. Then chatbot will learn about the shop and work finely...
 
 If you are running this first time please uncomment 
 "nltk.download('punkt')" 

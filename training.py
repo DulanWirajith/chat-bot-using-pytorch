@@ -76,3 +76,26 @@ for (pattern_sentence, tag) in xy:
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
+class ChatDataset(Dataset):
+
+    def __init__(self):
+        self.n_samples = len(X_train)
+        self.x_data = X_train
+        self.y_data = y_train
+
+    # support indexing such that dataset[i] can be used to get i-th sample
+    def __getitem__(self, index):
+        return self.x_data[index], self.y_data[index]
+
+    # we can call len(dataset) to return the size
+    def __len__(self):
+        return self.n_samples
+
+dataset = ChatDataset()
+train_loader = DataLoader(dataset=dataset,
+                          batch_size=8,
+                          shuffle=True,
+                          num_workers=0)
+#  you can change num_workers=0 to 2 , if you have pytorch gpu(cuda)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

@@ -132,3 +132,16 @@ for epoch in range(num_of_epochs):
     if (epoch + 1) % 100 == 0:
         print(f'Epoch [{epoch + 1}/{num_of_epochs}], Loss: {loss.item():.4f}')
 
+chat_data = {
+"model_state": model.state_dict(),
+"input_size": input_size,
+"hidden_size": hidden_size,
+"output_size": output_size,
+"all_words": all_words,
+"tags": tags
+}
+
+FILE = "chat_data.pth"
+torch.save(chat_data, FILE)
+
+print(f'training complete. file saved to {FILE}')
